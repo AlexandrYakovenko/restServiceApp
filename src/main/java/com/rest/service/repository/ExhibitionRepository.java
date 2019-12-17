@@ -1,0 +1,13 @@
+package com.rest.service.repository;
+
+import com.rest.service.entity.Exhibition;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface ExhibitionRepository extends JpaRepository<Exhibition, Long> {
+
+    Optional<Exhibition> findExhibitionById(Long id);
+}

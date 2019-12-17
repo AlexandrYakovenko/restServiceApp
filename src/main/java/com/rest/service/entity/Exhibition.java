@@ -1,8 +1,18 @@
 package com.rest.service.entity;
 
+import javax.persistence.*;
+
+@Entity
 public class Exhibition {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column
     private String title;
+
+    public Exhibition() {
+    }
 
     public Exhibition(Long id, String title) {
         this.id = id;
