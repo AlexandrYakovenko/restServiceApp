@@ -1,28 +1,22 @@
 package com.rest.service.controller;
 
 import com.rest.service.entity.Exhibition;
+import com.rest.service.repository.ExhibitionRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.NoSuchElementException;
+import javax.annotation.Resource;
 
 @RestController
 public class EntityController {
 
-    private List<Exhibition> list = Arrays.asList(
-            new Exhibition(1L, "Sport"),
-            new Exhibition(2L, "Candies"),
-            new Exhibition(3L, "Comics"),
-            new Exhibition(4L, "Furs"));
+    @Resource
+    private ExhibitionRepository exhibitionRepository;
 
-    @GetMapping("/exhibitions")
-    public Exhibition getExhibition(@RequestParam Long id) {
-        return list.stream()
-                .filter(x -> x.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("Don't find this exhibition"));
+    @GetMapping("/exhibitions/{exhibitionId}")
+    public ResponseEntity<Exhibition> getExhibition(@PathVariable Long exhibitionId) {
+        return ResponseEntity.of(exhibitionRepository.findExhibitionById(exhibitionId));
     }
 }
