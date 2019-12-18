@@ -1,4 +1,4 @@
-package com.rest.service.entity;
+package com.rest.entity;
 
 import javax.persistence.*;
 
